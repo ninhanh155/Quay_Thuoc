@@ -1,4 +1,6 @@
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.gson.Gson;
 import com.google.gson.stream.JsonReader;
@@ -7,11 +9,23 @@ import static java.lang.System.out;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 public class Quầy_Thuốc {
     static Thuốc[] mảng = new Thuốc[0];
@@ -76,10 +90,10 @@ public class Quầy_Thuốc {
         } while (true);
     
         do {
-            System.out.print("\nNhập hạn sử dụng: ");
+            System.out.print("\nNhập hạn sử dụng (định dạng dd.mm.yyyy hoặc dd/mm/yyyy): ");
             if (scan.hasNextLine()) {
                 String input = scan.nextLine();
-                if (input.matches("[a-zA-Z ]+")) {
+                if (input.matches("\\d{2}\\.\\d{2}\\.\\d{4}|\\d{2}/\\d{2}/\\d{4}")) {
                     thuoc.hsd = input;
                     break;
                 } else {
@@ -452,9 +466,6 @@ public class Quầy_Thuốc {
             out.print("\n Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
             ex.printStackTrace();
         }
-        // finally {
-        // writer.close();
-        // }
 
         System.out.println("\n Đã ghi file JSON");
     }
@@ -486,4 +497,154 @@ public class Quầy_Thuốc {
             e.printStackTrace();
         }
     }
+
+
+
+    // đăng ký tài khoảng 
+    public static void DangKi() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Đăng ký");
+    
+        while (true) {
+            System.out.print("Nhập tên: ");
+            String name = scan.nextLine();
+    
+            System.out.print("Nhập tên người dùng: ");
+            String username = scan.nextLine();
+    
+            System.out.print("Nhập mật khẩu: ");
+            String password = scan.nextLine();
+    
+            System.out.print("Nhập lại mật khẩu: ");
+            String passwordAgain = scan.nextLine();
+    
+            if (password.equals(passwordAgain)) {
+                if (checkSpecialCharacter(username)) {
+                    System.out.println("Vui lòng nhập lại, tên người dùng không được chứa ký tự đặc biệt!");
+    
+                    String hashedPassword = hashPassword(password);
+                    String hashedPasswordStr = new String(hashedPassword);
+    
+                    double id = Math.random();
+    
+                    User userObj = new User();
+                    userObj.setId(id);
+                    userObj.setName(name);
+                    userObj.setUsername(username);
+                    userObj.setPassword(hashedPasswordStr);
+    
+                    String filePath = "data/User/" + userObj.getUsername() + ".json";
+                    File file = new File(filePath);
+    
+                    if (file.exists()) {
+                        System.out.println("Tài khoản này đã được đăng ký, vui lòng đăng ký tài khoản khác.");
+                        break;
+                    } else {
+                        try {
+                            saveUserToJsonFile(userObj, filePath);
+                            System.out.println("Đăng ký thành công");
+                            return;
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                } else {
+                    System.out.println("Tên người dùng không được chứa ký tự đặc biệt.");
+                }
+            } else {
+                System.out.println("Mật khẩu không khớp.");
+            }
+        }
+    }
+    
+    public static boolean checkSpecialCharacter(String str) {
+        // Kiểm tra xem str có chứa ký tự đặc biệt hay không
+        Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
+        Matcher matcher = pattern.matcher(str);
+        return matcher.find();
+    }
+    
+    public static String hashPassword(String password) {
+        // Thực hiện mã hóa mật khẩu và trả về mật khẩu đã được mã hóa
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-256");
+            byte[] hashedBytes = md.digest(password.getBytes());
+            StringBuilder sb = new StringBuilder();
+            for (byte b : hashedBytes) {
+                sb.append(String.format("%02x", b));
+            }
+            return sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+    public static void saveUserToJsonFile(User user, String filePath) throws IOException {
+        Gson gson = new Gson();
+    
+        try (FileWriter writer = new FileWriter(filePath)) {
+            gson.toJson(user, writer);
+        }
+    }
+
+
+    // đăng nhập
+    public static void DangNhap() {
+        Scanner scan = new Scanner(System.in);
+        boolean adminCheck = false;
+
+        System.out.print("Đăng nhập\n");
+        System.out.print("Nhập tên người dùng: ");
+        String username = scan.nextLine();
+
+        System.out.print("Nhập mật khẩu: ");
+        String password = scan.nextLine();
+
+        if (username.startsWith("admin")) {
+            JSONParser parser = new JSONParser();
+
+            try {
+                Object obj = parser.parse(new FileReader("data/admin.json"));
+                JSONObject data = (JSONObject) obj;
+                JSONArray admins = (JSONArray) data.get("admin");
+
+                for (Object admin : admins) {
+                    JSONObject adminObj = (JSONObject) admin;
+                    if (adminObj.get("username").equals(username) && adminObj.get("password").equals(password)) {
+                        System.out.print("Admin đăng nhập thành công !");
+                        adminCheck = true;
+                        break;
+                    }
+                }
+            } catch (IOException | ParseException e) {
+                e.printStackTrace();
+            }
+        } else {
+            String filePath = "data/" + username + ".json";
+
+            if (new File(filePath).exists()) {
+                JSONParser parser = new JSONParser();
+
+                try {
+                    Object obj = parser.parse(new FileReader(filePath));
+                    JSONObject data = (JSONObject) obj;
+                    JSONArray clients = (JSONArray) data.get("client");
+
+                    for (Object client : clients) {
+                        JSONObject clientObj = (JSONObject) client;
+                        if (clientObj.get("username").equals(username) && clientObj.get("password").equals(password)) {
+                            System.out.print("Đăng nhập thành công !");
+                            adminCheck = true;
+                            break;
+                        }
+                    }
+                } catch (IOException | ParseException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                System.out.print("Người dùng không tồn tại");
+            }
+        }
+    }
 }
+

@@ -2,14 +2,17 @@ import java.util.Scanner;
 import static java.lang.System.out;
 
 class App {
-    public static void main(String[] args) throws Exception {
-        while (true) {
-            out.print("\n+----------------------------------------------------------------------+");
-            out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ THUỐC (c) 2023.11.25 11h54                      |");
-            out.print("\n+--------------------------------MENU----------------------------------+");
-            out.print("\n| 1.Thêm | 2.Sửa | 3.Xoá | 4.Sắp Xếp | 5.Thống Kê | 6.MMA | 7.Tìm Kiếm |");
-            out.print("\n| 8.Ghi File | 9. Đọc File | 0. Thoát                                  |");
-            out.print("\n+----------------------------------------------------------------------+");
+
+
+public static 
+    void menu()
+    {
+         while (true) {
+            out.print("\n+------------------------------------------------------------------------------------------------------------------+");
+            out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ THUỐC (c) 2023.11.25 11h54                                                                  |");
+            out.print("\n+--------------------------------MENU------------------------------------------------------------------------------+");
+            out.print("\n| 1.Thêm | 2.Sửa | 3.Xoá | 4.Sắp Xếp | 5.Phân Loại | 6.Thống Kê | 7.Tìm Kiếm | 8.Ghi File | 9. Đọc File | 0. Thoát |");
+            out.print("\n+------------------------------------------------------------------------------------------------------------------+");
 
             out.print("\n Chọn menu: ");
             var scan = new Scanner(System.in);
@@ -55,7 +58,37 @@ class App {
                     break;
                 case 0:
                     out.print("\n Đang thoát...");
-                    // Thread.sleep(3000);
+                    return;
+                default:
+                    out.print("\n Hãy nhập menu hợp lệ !");
+                    break;
+            }
+
+        }
+    
+    }
+    public static void main(String[] args) throws Exception {
+
+        while (true) {
+            out.print("\n+--------------------------------------+");
+            out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ                 |");
+            out.print("\n+----------------MENU------------------+");
+            out.print("\n| 1. Đăng Ký | 2. Đăng Nhập | 0. Thoát |");
+            out.print("\n+--------------------------------------+");
+            System.out.print("\nChọn menu: ");
+            var scan = new Scanner(System.in);
+            var menu = scan.nextInt();
+            switch (menu) {
+                case 1:
+                    Quầy_Thuốc.DangKi();
+                    menu();
+                    break;
+                case 2:
+                    Quầy_Thuốc.DangNhap();
+                    menu();
+                    break;
+                case 0:
+                    out.print("\n Đang thoát...");
                     scan.close();
                     System.exit(0);
                     break;
@@ -65,5 +98,7 @@ class App {
             }
 
         }
+        
+        
     }
 }
