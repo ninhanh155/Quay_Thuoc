@@ -8,11 +8,11 @@ public static
     void menu()
     {
          while (true) {
-            out.print("\n+------------------------------------------------------------------------------------------------------------------+");
-            out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ THUỐC (c) 2023.11.25 11h54                                                                  |");
-            out.print("\n+--------------------------------MENU------------------------------------------------------------------------------+");
-            out.print("\n| 1.Thêm | 2.Sửa | 3.Xoá | 4.Sắp Xếp | 5.Phân Loại | 6.Thống Kê | 7.Tìm Kiếm | 8.Ghi File | 9. Đọc File | 0. Thoát |");
-            out.print("\n+------------------------------------------------------------------------------------------------------------------+");
+            out.print("\n+-------------------------------------------------------------------------------------------------------------------------------+");
+            out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ QUẦY THUỐC                                                                                               |");
+            out.print("\n+-----------------------------------------------------------MENU----------------------------------------------------------------+");
+            out.print("\n| 1.Thêm | 2.Sửa | 3.Xoá | 4.Sắp Xếp | 5.Phân Loại | 6.Thống Kê | 7.Tìm Kiếm | 8.Ghi File | 9. Đọc File |10.Mua Hàng | 0. Thoát |");
+            out.print("\n+-------------------------------------------------------------------------------------------------------------------------------+");
 
             out.print("\n Chọn menu: ");
             var scan = new Scanner(System.in);
@@ -56,6 +56,11 @@ public static
                     // làm việc 9
                     Quầy_Thuốc.ĐọcFileJSON();
                     break;
+
+                case 10:
+                    Quầy_Thuốc.muahang();
+                    break;
+
                 case 0:
                     out.print("\n Đang thoát...");
                     return;
@@ -68,7 +73,7 @@ public static
     
     }
     public static void main(String[] args) throws Exception {
-
+       
         while (true) {
             out.print("\n+--------------------------------------+");
             out.print("\n| CHƯƠNG TRÌNH QUẢN LÝ                 |");
@@ -98,7 +103,5 @@ public static
             }
 
         }
-        
-        
     }
 }
