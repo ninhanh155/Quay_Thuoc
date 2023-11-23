@@ -20,8 +20,10 @@ import java.io.OutputStreamWriter;
 import java.io.Writer;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
-
+// import java.text.ParseException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Random;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -90,14 +92,22 @@ public class Quầy_Thuốc {
         } while (true);
     
         do {
-            System.out.print("\nNhập hạn sử dụng (định dạng dd.mm.yyyy hoặc dd/mm/yyyy): ");
+            System.out.print("\nNhập hạn sử dụng (định dạng dd/mm/yyyy): ");
             if (scan.hasNextLine()) {
                 String input = scan.nextLine();
-                if (input.matches("\\d{2}\\.\\d{2}\\.\\d{4}|\\d{2}/\\d{2}/\\d{4}")) {
-                    thuoc.hsd = input;
-                    break;
-                } else {
-                    System.out.println("Không hợp lệ. Vui lòng nhập lại.");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                try {
+                    LocalDate date = LocalDate.parse(input, formatter);
+                    LocalDate today = LocalDate.now();
+
+                    if (date.isAfter(today) || date.isEqual(today)) {
+                        thuoc.hsd = formatter.format(date);
+                        break;
+                    } else {
+                        System.out.println("Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
+                    }
+                } catch (java.time.format.DateTimeParseException e) {
+                    System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
                 System.out.println("Không có dữ liệu đầu vào hợp lệ.");
@@ -205,14 +215,22 @@ public class Quầy_Thuốc {
         } while (true);
     
         do {
-            System.out.print("\nNhập hạn sử dụng: ");
+            System.out.print("\nNhập hạn sử dụng (định dạng dd/mm/yyyy): ");
             if (scan.hasNextLine()) {
                 String input = scan.nextLine();
-                if (input.matches("[a-zA-Z ]+")) {
-                    thuoc.hsd = input;
-                    break;
-                } else {
-                    System.out.println("Không hợp lệ. Vui lòng nhập lại.");
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                try {
+                    LocalDate date = LocalDate.parse(input, formatter);
+                    LocalDate today = LocalDate.now();
+
+                    if (date.isAfter(today) || date.isEqual(today)) {
+                        thuoc.hsd = formatter.format(date);
+                        break;
+                    } else {
+                        System.out.println("Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
+                    }
+                } catch (java.time.format.DateTimeParseException e) {
+                    System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
                 System.out.println("Không có dữ liệu đầu vào hợp lệ.");
@@ -498,8 +516,41 @@ public class Quầy_Thuốc {
         }
     }
 
-
-
+    public static void muahang()
+    {
+            Scanner scan = new Scanner(System.in);
+        
+            boolean check = false;
+            // Nhập tên thuốc
+            System.out.print("Nhập tên thuốc: ");
+            String Tên = scan.nextLine();
+    
+            // Nhập số lượng thuốc
+            System.out.print("Nhập số lượng: ");
+            int số_lượng = scan.nextInt();
+            float dulieu = 0;
+            for (int i = 0; i < mảng.length; i++) {
+                String ten = mảng[i].Tên.toLowerCase();
+                if (ten.startsWith(Tên)) {
+                    check = true;
+                    int stt = i + 1;
+                    dulieu = mảng[i].Giá;
+                    break;// In ra thông tin của sinh viên tìm thấy
+                }
+            
+            }
+            if (check == false) {
+                System.out.println("\nKhông có loại thuốc bạn cần tìm");
+            }
+            else{
+                double thanhtien = số_lượng * dulieu;
+                System.out.println("Thông tin đơn hàng:");
+                System.out.println("Tên thuốc: " + Tên);
+                System.out.println("Số lượng: " + số_lượng);
+                System.out.println("Giá: " +  dulieu);
+                System.out.println("Thành tiền: " + thanhtien + "$");
+            }
+    }
     // đăng ký tài khoảng 
     public static void DangKi() {
         Scanner scan = new Scanner(System.in);
@@ -509,8 +560,13 @@ public class Quầy_Thuốc {
             System.out.print("Nhập tên: ");
             String name = scan.nextLine();
     
-            System.out.print("Nhập tên người dùng: ");
+            System.out.print("Nhập tên tài khoản: ");
             String username = scan.nextLine();
+    
+            if (username.equals("admin")) {
+                System.out.println("Tài khoản admin đã được đăng ký.");
+                break;
+            }
     
             System.out.print("Nhập mật khẩu: ");
             String password = scan.nextLine();
@@ -520,11 +576,12 @@ public class Quầy_Thuốc {
     
             if (password.equals(passwordAgain)) {
                 if (!checkSpecialCharacter(username)) {
-                    
+    
                     String hashedPassword = hashPassword(password);
                     String hashedPasswordStr = new String(hashedPassword);
     
-                    double id = Math.random();
+                    Random random = new Random();
+                    int id = random.nextInt(100000) + 1;
     
                     User userObj = new User();
                     userObj.setId(id);
@@ -585,65 +642,52 @@ public class Quầy_Thuốc {
             gson.toJson(user, writer);
         }
     }
-
-
     // đăng nhập
     public static void DangNhap() {
         Scanner scan = new Scanner(System.in);
         boolean adminCheck = false;
-
+    
         System.out.print("Đăng nhập\n");
         System.out.print("Nhập tên người dùng: ");
         String username = scan.nextLine();
-
+    
         System.out.print("Nhập mật khẩu: ");
         String password = scan.nextLine();
-
-        if (username.startsWith("admin")) {
+    
+        if (username.equals("admin")) {
+            System.out.println("Tài khoản admin không thể đăng nhập ở đây.");
+            return;
+        }
+    
+        String filePath = "data/User/" + username + ".json";
+    
+        if (new File(filePath).exists()) {
             JSONParser parser = new JSONParser();
-
+    
             try {
-                Object obj = parser.parse(new FileReader("data/admin.json"));
-                JSONObject data = (JSONObject) obj;
-                JSONArray admins = (JSONArray) data.get("admin");
-
-                for (Object admin : admins) {
-                    JSONObject adminObj = (JSONObject) admin;
-                    if (adminObj.get("username").equals(username) && adminObj.get("password").equals(password)) {
-                        System.out.print("Admin đăng nhập thành công !");
+                Object obj = parser.parse(new FileReader(filePath));
+                JSONObject user = (JSONObject) obj;
+    
+                if (user.get("username").equals(username)) {
+                    String hashedPassword = (String) user.get("password");
+                    String hashedInputPassword = hashPassword(password);
+    
+                    if (hashedPassword.equals(hashedInputPassword)) {
+                        System.out.print("Đăng nhập thành công !");
                         adminCheck = true;
-                        break;
+                    } else {
+                        System.out.println("Mật khẩu không chính xác.");
                     }
+                } else {
+                    System.out.println("Người dùng không tồn tại.");
                 }
             } catch (IOException | ParseException e) {
                 e.printStackTrace();
             }
         } else {
-            String filePath = "data/" + username + ".json";
-
-            if (new File(filePath).exists()) {
-                JSONParser parser = new JSONParser();
-
-                try {
-                    Object obj = parser.parse(new FileReader(filePath));
-                    JSONObject data = (JSONObject) obj;
-                    JSONArray clients = (JSONArray) data.get("client");
-
-                    for (Object client : clients) {
-                        JSONObject clientObj = (JSONObject) client;
-                        if (clientObj.get("username").equals(username) && clientObj.get("password").equals(password)) {
-                            System.out.print("Đăng nhập thành công !");
-                            adminCheck = true;
-                            break;
-                        }
-                    }
-                } catch (IOException | ParseException e) {
-                    e.printStackTrace();
-                }
-            } else {
-                System.out.print("Người dùng không tồn tại");
-            }
+            System.out.print("Người dùng không tồn tại");
         }
+        
     }
 }
 
