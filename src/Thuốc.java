@@ -14,4 +14,5 @@ public class Thuốc {
     // số lượng 
     int số_lượng;
 
+    double thanhtien;
 }
