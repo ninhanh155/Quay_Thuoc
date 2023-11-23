@@ -519,9 +519,8 @@ public class Quầy_Thuốc {
             String passwordAgain = scan.nextLine();
     
             if (password.equals(passwordAgain)) {
-                if (checkSpecialCharacter(username)) {
-                    System.out.println("Vui lòng nhập lại, tên người dùng không được chứa ký tự đặc biệt!");
-    
+                if (!checkSpecialCharacter(username)) {
+                    
                     String hashedPassword = hashPassword(password);
                     String hashedPasswordStr = new String(hashedPassword);
     
