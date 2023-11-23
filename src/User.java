@@ -3,7 +3,11 @@ public class User {
      String name;
      String username;
      String password;
+     boolean isAdmin;
 
+     public void setAdmin(boolean isAdmin) {
+         this.isAdmin = isAdmin;
+     }
      public double getId() {
         return id;
     }
