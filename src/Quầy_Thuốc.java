@@ -37,7 +37,7 @@ public class Quầy_Thuốc {
     }
 
     static void Bảng() {
-        out.print("\n Bảng Dữ Liệu Thuốc:");
+        out.print("\n********Bảng Dữ Liệu Thuốc********");
 
         // in cột
         Cột();
@@ -83,10 +83,10 @@ public class Quầy_Thuốc {
                     thuoc.Tên = input;
                     break;
                 } else {
-                    System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Tên không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -104,13 +104,13 @@ public class Quầy_Thuốc {
                         thuoc.hsd = formatter.format(date);
                         break;
                     } else {
-                        System.out.println("Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
+                        System.out.println("  => Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
                     }
                 } catch (java.time.format.DateTimeParseException e) {
-                    System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -124,10 +124,10 @@ public class Quầy_Thuốc {
                     thuoc.Giá = input;
                     break;
                 } else {
-                    System.out.println("Giá không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Giá không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 scan.nextLine(); // Đọc dòng mới sau khi gặp lỗi
             }
         } while (true);
@@ -140,10 +140,10 @@ public class Quầy_Thuốc {
                     thuoc.nsx = input;
                     break;
                 } else {
-                    System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Tên không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -157,10 +157,10 @@ public class Quầy_Thuốc {
                     thuoc.số_lượng = input;
                     break;
                 } else {
-                    System.out.println("Số lượng tồn kho không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Số lượng tồn kho không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 scan.nextLine(); // Đọc dòng mới sau khi gặp lỗi
             }
         } while (true);
@@ -183,12 +183,12 @@ public class Quầy_Thuốc {
                 stt = scan.nextInt();
                 scan.nextLine();
                 if (stt <= 0 || stt > mảng.length) {
-                    System.out.println("STT không hợp lệ. Vui lòng nhập lại một số nguyên dương!");
+                    System.out.println("  => STT không hợp lệ. Vui lòng nhập lại một số nguyên dương!");
                 } else {
                     check = true;
                 }
             } else {
-                System.out.println("Vui lòng nhập một số nguyên!");
+                System.out.println("  => Vui lòng nhập một số nguyên!");
                 scan.nextLine();
             }
         } while (!check);
@@ -196,7 +196,7 @@ public class Quầy_Thuốc {
         int viTri = stt - 1;
 
         var thuoc = new Thuốc();
-        out.printf("\n Cập nhật dữ liệu cho phần tử mảng[%d]: ", viTri);
+        out.printf("\n Cập nhật dữ liệu cho thuốc: ", viTri);
         // Nhập tên
         do {
             System.out.print("\nNhập tên thuốc: ");
@@ -206,10 +206,10 @@ public class Quầy_Thuốc {
                     thuoc.Tên = input;
                     break;
                 } else {
-                    System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Tên không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -227,13 +227,13 @@ public class Quầy_Thuốc {
                         thuoc.hsd = formatter.format(date);
                         break;
                     } else {
-                        System.out.println("Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
+                        System.out.println("  => Ngày không hợp lệ. Hãy thử kiểm tra form nhập hoặc ngày xem đã quá hạn chưa nhé!");
                     }
                 } catch (java.time.format.DateTimeParseException e) {
-                    System.out.println("Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Định dạng ngày không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -247,10 +247,10 @@ public class Quầy_Thuốc {
                     thuoc.Giá = input;
                     break;
                 } else {
-                    System.out.println("Giá không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Giá không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 scan.nextLine(); // Đọc dòng mới sau khi gặp lỗi
             }
         } while (true);
@@ -263,10 +263,10 @@ public class Quầy_Thuốc {
                     thuoc.nsx = input;
                     break;
                 } else {
-                    System.out.println("Tên không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Tên không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 return;
             }
         } while (true);
@@ -280,10 +280,10 @@ public class Quầy_Thuốc {
                     thuoc.số_lượng = input;
                     break;
                 } else {
-                    System.out.println("Số lượng tồn kho không hợp lệ. Vui lòng nhập lại.");
+                    System.out.println("  => Số lượng tồn kho không hợp lệ. Vui lòng nhập lại.");
                 }
             } else {
-                System.out.println("Không có dữ liệu đầu vào hợp lệ.");
+                System.out.println("  => Không có dữ liệu đầu vào hợp lệ.");
                 scan.nextLine(); // Đọc dòng mới sau khi gặp lỗi
             }
         } while (true);
@@ -291,7 +291,7 @@ public class Quầy_Thuốc {
         // Lưu dữ liệu mới của thuốc vào vị trí cũ
         mảng[viTri] = thuoc;
 
-        out.print("\n Danh sách thuốc sau khi sửa: ");
+        out.print("\n  => Danh sách thuốc sau khi sửa: ");
 
         Bảng();
 
@@ -310,12 +310,12 @@ public class Quầy_Thuốc {
                 stt = scan.nextInt();
                 scan.nextLine();
                 if (stt <= 0 || stt > mảng.length) {
-                    System.out.println("STT không hợp lệ. Vui lòng nhập lại một số nguyên dương!");
+                    System.out.println("  => STT không hợp lệ. Vui lòng nhập lại một số nguyên dương!");
                 } else {
                     check = true;
                 }
             } else {
-                System.out.println("Vui lòng nhập một số nguyên!");
+                System.out.println("  => Vui lòng nhập một số nguyên!");
                 scan.nextLine();
             }
         } while (!check);
@@ -340,7 +340,7 @@ public class Quầy_Thuốc {
 
         mảng = mang_moi;
 
-        out.print("\n Danh sách sau khi xóa: ");
+        out.print("\n  => Danh sách sau khi xóa: ");
         Bảng();
     }
 
@@ -359,7 +359,7 @@ public class Quầy_Thuốc {
             }
         }
 
-        out.print("\n Đã sắp xếp giảm dần theo Giá: ");
+        out.print("\n********Đã Sắp Xếp Giảm Dần Theo Giá********");
         Bảng();
     }
 
@@ -385,9 +385,9 @@ public class Quầy_Thuốc {
         }
         avg = sum/mảng.length;
 
-        out.printf("\n Giá min: %.1f", min);
-        out.printf("\n Giá max: %.1f", max);
-        out.printf("\n Giá trung bình: %.1f", avg);
+        out.printf("\n  => Giá min: %.1f", min);
+        out.printf("\n  => Giá max: %.1f", max);
+        out.printf("\n  => Giá trung bình: %.1f", avg);
     }
 
     static void PhanLoai() {
@@ -415,7 +415,7 @@ public class Quầy_Thuốc {
         // In dữ liệu thống kê, phân loại ra màn hình
         for (int i = 0; i < sl.length; i++) {
             if (sl[i] != 0) {
-                out.printf("\n Nhà sản xuất %s có %d thuốc.", mảng[i].nsx, sl[i]);
+                out.printf("\n  -> Nhà sản xuất %s có %d thuốc.", mảng[i].nsx, sl[i]);
             }
         }
     }
@@ -439,12 +439,11 @@ public class Quầy_Thuốc {
                         int stt = i + 1;
                         Thuốc dulieu = mảng[i];
                         Dòng(stt, dulieu);
-                        // Uncomment the following line if you want to display multiple results
-                        // check = true;
+                        
                     }
                 }
                 if (!check) {
-                    System.out.println("\nKhông có dữ liệu thuốc bạn muốn tìm");
+                    System.out.println("\n  => Không có dữ liệu thuốc bạn muốn tìm");
                     break;
                 }
             }  
@@ -477,11 +476,11 @@ public class Quầy_Thuốc {
             writer.close(); 
 
         } catch (Exception ex) {
-            out.print("\n Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
+            out.print("\n  => Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
             ex.printStackTrace();
         }
 
-        System.out.println("\n Đã ghi file JSON");
+        System.out.println("\n*****Đã ghi file JSON*****");
     }
 
     
@@ -507,7 +506,7 @@ public class Quầy_Thuốc {
 
             Bảng();
         } catch (Exception e) {
-            out.print("\n Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
+            out.print("\n  => Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
             e.printStackTrace();
         }
     }
@@ -536,58 +535,58 @@ public class Quầy_Thuốc {
             
             }
             if (check == false) {
-                System.out.println("\nKhông có loại thuốc bạn cần tìm");
+                System.out.println("\n  => Không có loại thuốc bạn cần tìm");
             }
             else{
                 double thanhtien = số_lượng * dulieu;
-                System.out.println("Thông tin đơn hàng:");
-                System.out.println("Tên thuốc: " + Tên);
-                System.out.println("Số lượng: " + số_lượng);
-                System.out.println("Giá: " +  dulieu);
-                System.out.println("Thành tiền: " + thanhtien + "$");
+                System.out.println("Thông tin đơn thuốc($):");
+                System.out.println("    +> Tên thuốc: " + Tên);
+                System.out.println("    +> Số lượng: " + số_lượng);
+                System.out.println("    +> Giá: " +  dulieu);
+                System.out.println("    +> Thành tiền: " + thanhtien);
             }
     }
     // đăng ký tài khoảng 
     public static void DangKi() {
         Scanner scan = new Scanner(System.in);
         System.out.println("Đăng ký");
-    
+
         while (true) {
             System.out.print("Nhập tên: ");
             String name = scan.nextLine();
-    
+
             System.out.print("Nhập tên tài khoản: ");
             String username = scan.nextLine();
-    
+
             if (username.equals("admin")) {
                 System.out.println("Tài khoản admin đã được đăng ký.");
-                break;
+                continue;
             }
-    
+
             System.out.print("Nhập mật khẩu: ");
             String password = scan.nextLine();
-    
+
             System.out.print("Nhập lại mật khẩu: ");
             String passwordAgain = scan.nextLine();
-    
+
             if (password.equals(passwordAgain)) {
                 if (!checkSpecialCharacter(username)) {
-    
+
                     String hashedPassword = hashPassword(password);
                     String hashedPasswordStr = new String(hashedPassword);
-    
+
                     Random random = new Random();
                     int id = random.nextInt(100000) + 1;
-    
+
                     User userObj = new User();
                     userObj.setId(id);
                     userObj.setName(name);
                     userObj.setUsername(username);
                     userObj.setPassword(hashedPasswordStr);
-    
+
                     String filePath = "data/User/" + userObj.getUsername() + ".json";
                     File file = new File(filePath);
-    
+
                     if (file.exists()) {
                         System.out.println("Tài khoản này đã được đăng ký, vui lòng đăng ký tài khoản khác.");
                         break;
@@ -595,6 +594,7 @@ public class Quầy_Thuốc {
                         try {
                             saveUserToJsonFile(userObj, filePath);
                             System.out.println("Đăng ký thành công");
+                            Menu.menu();
                             return;
                         } catch (IOException e) {
                             e.printStackTrace();
@@ -609,6 +609,29 @@ public class Quầy_Thuốc {
         }
     }
     
+    public static 
+        void Gan()
+        {
+            Gson gson = new Gson();
+
+        try {
+            // Đường dẫn tĩnh để test nhanh
+            
+            
+            String filePath = "test.json";
+            JsonReader reader = new JsonReader(new BufferedReader(
+                    new InputStreamReader(
+                            new FileInputStream(filePath),
+                            "UTF-8")));
+
+            mảng = gson.fromJson(reader, Thuốc[].class);
+
+        } catch (Exception e) {
+            // out.print("\n Lỗi tệp file hoặc mã hóa bộ kí tự UTF8: ");
+            e.printStackTrace();
+        }
+        }
+
     public static boolean checkSpecialCharacter(String str) {
         // Kiểm tra xem str có chứa ký tự đặc biệt hay không
         Pattern pattern = Pattern.compile("[^a-zA-Z0-9]");
@@ -631,6 +654,11 @@ public class Quầy_Thuốc {
             return null;
         }
     }
+
+    public static boolean checkAdminPassword(String password) {
+        return password.equals("1234");  
+    }
+
     public static void saveUserToJsonFile(User user, String filePath) throws IOException {
         Gson gson = new Gson();
     
@@ -642,48 +670,65 @@ public class Quầy_Thuốc {
     public static void DangNhap() {
         Scanner scan = new Scanner(System.in);
         boolean adminCheck = false;
-    
-        System.out.print("Đăng nhập\n");
-        System.out.print("Nhập tên người dùng: ");
-        String username = scan.nextLine();
-    
-        System.out.print("Nhập mật khẩu: ");
-        String password = scan.nextLine();
-    
-        if (username.equals("admin")) {
-            System.out.println("Tài khoản admin không thể đăng nhập ở đây.");
-            return;
-        }
-    
-        String filePath = "data/User/" + username + ".json";
-    
-        if (new File(filePath).exists()) {
-            JSONParser parser = new JSONParser();
-    
-            try {
-                Object obj = parser.parse(new FileReader(filePath));
-                JSONObject user = (JSONObject) obj;
-    
-                if (user.get("username").equals(username)) {
-                    String hashedPassword = (String) user.get("password");
-                    String hashedInputPassword = hashPassword(password);
-    
-                    if (hashedPassword.equals(hashedInputPassword)) {
-                        System.out.print("Đăng nhập thành công !");
-                        adminCheck = true;
+
+        while (true) {
+            System.out.print("*****Đăng nhập*****\n");
+            System.out.print("Nhập tên tài khoản: ");
+            String username = scan.nextLine();
+
+            System.out.print("Nhập mật khẩu: ");
+            String password = scan.nextLine();
+
+            if (username.equals("admin")) {
+                if (username.equals("admin")) {
+                    if (checkAdminPassword(password)) {
+                        System.out.println("********Đăng nhập thành công với tài khoản admin********");
+                        Menu.menuAdmin();
                     } else {
-                        System.out.println("Mật khẩu không chính xác.");
+                        System.out.println("  => Sai mật khẩu của tài khoản admin.");
+                    }
+                
+                }
+                break;
+            }
+            else{
+
+                String filePath = "data/User/" + username + ".json";
+
+                if (new File(filePath).exists()) {
+                    JSONParser parser = new JSONParser();
+
+                    try {
+                        Object obj = parser.parse(new FileReader(filePath));
+                        JSONObject user = (JSONObject) obj;
+
+                        if (user.get("username").equals(username)) {
+                            String hashedPassword = (String) user.get("password");
+                            String hashedInputPassword = hashPassword(password);
+
+                            if (hashedPassword.equals(hashedInputPassword)) {
+                                System.out.print("********Đăng nhập thành công********");
+                                adminCheck = true;
+                                Menu.menu();
+                                break; // Thoát khỏi vòng lặp nếu đăng nhập thành công
+                            } else {
+                                System.out.println("  => Mật khẩu không chính xác.");
+                            }
+                            
+                        } else {
+                            System.out.println("  => Người dùng không tồn tại.");
+                        }
+                    } catch (IOException | ParseException e) {
+                        e.printStackTrace();
                     }
                 } else {
-                    System.out.println("Người dùng không tồn tại.");
+                    System.out.print("  => Người dùng không tồn tại");
                 }
-            } catch (IOException | ParseException e) {
-                e.printStackTrace();
             }
-        } else {
-            System.out.print("Người dùng không tồn tại");
         }
-        
     }
+
+
+
 }
 
