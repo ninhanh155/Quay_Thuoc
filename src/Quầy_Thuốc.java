@@ -420,40 +420,36 @@ public class Quầy_Thuốc {
         }
     }
 
-    public static 
-        void TimKiem()
-        {
-            Scanner scan = new Scanner(System.in);
-            
-            boolean check = false; 
-             // In cột tiêu đề
-            
-            do {
-                System.out.print("Nhập tên thuốc cần tìm: ");
-                String charInput = scan.nextLine().toLowerCase();
-
-                if (!charInput.matches("[a-zA-Z ]+")) {
-                    System.out.println("\nTên không hợp lệ. Vui lòng nhập lại.");
-                }
-                else{
-                    Cột();
-                    for (int i = 0; i < mảng.length; i++) {
+    public static void TimKiem() {
+        Scanner scan = new Scanner(System.in);
+        boolean check = false; 
+    
+        do {
+            System.out.print("Nhập từ khóa cần tìm: ");
+            String keywordInput = scan.nextLine().toLowerCase();
+    
+            if (!keywordInput.matches("[a-zA-Z ]+")) {
+                System.out.println("\nTừ khóa không hợp lệ. Vui lòng nhập lại.");
+            } else {
+                Cột();
+                for (int i = 0; i < mảng.length; i++) {
                     String ten = mảng[i].Tên.toLowerCase();
-                    if (ten.startsWith(charInput)) {
+                    if (ten.contains(keywordInput)) {
                         check = true;
                         int stt = i + 1;
                         Thuốc dulieu = mảng[i];
-                        Dòng( stt, dulieu);
-                        break;// In ra thông tin của sinh viên tìm thấy
+                        Dòng(stt, dulieu);
+                        // Uncomment the following line if you want to display multiple results
+                        // check = true;
                     }
-                    }
+                }
                 if (!check) {
-                    System.out.println("\nKhông có dữ liệu tên thuốc bạn muốn tìm");
+                    System.out.println("\nKhông có dữ liệu thuốc bạn muốn tìm");
                     break;
                 }
-                }  
-            }while(!check);
-        }
+            }  
+        } while(!check);
+    }
 
     public static void GhiFileJSON() {
 
