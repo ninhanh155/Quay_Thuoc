@@ -391,27 +391,28 @@ public class Quầy_Thuốc {
     }
 
     static void PhanLoai() {
-
-        // Mảng chứa dữ liệu thống kê
+    // Mảng chứa dữ liệu thống kê
         int[] sl = new int[mảng.length]; // mối phần tử = 0
-
+    
         for (int i = 0; i < sl.length; i++) {
             sl[i] = 1;
         }
-
+    
         // Tinh chỉnh dữ liệu thống kê
         for (int i = 0; i < mảng.length; i++) {
             for (int j = i + 1; j < mảng.length; j++) {
-                var i_j_cùng_loại = mảng[i].nsx == mảng[j].nsx;
-
-                if// nếu
-                (i_j_cùng_loại && sl[j] != 0) {
+                boolean i_j_cùng_loại = mảng[i].nsx.equals(mảng[j].nsx);
+    
+                if (i_j_cùng_loại && sl[j] != 0) {
                     sl[i]++;
-                    sl[j]--;
+                    sl[j]++;
+    
+                    // Đánh dấu dữ liệu đã được xử lý
+                    sl[j] = 0;
                 }
             }
         }
-
+    
         // In dữ liệu thống kê, phân loại ra màn hình
         for (int i = 0; i < sl.length; i++) {
             if (sl[i] != 0) {
