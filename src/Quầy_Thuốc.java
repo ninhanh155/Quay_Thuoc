@@ -618,7 +618,7 @@ public class Quầy_Thuốc {
             // Đường dẫn tĩnh để test nhanh
             
             
-            String filePath = "test.json";
+            String filePath = "thuoc.json";
             JsonReader reader = new JsonReader(new BufferedReader(
                     new InputStreamReader(
                             new FileInputStream(filePath),
